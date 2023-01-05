@@ -1,0 +1,195 @@
+﻿<Window x:Class="TimeKeeper.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:TimeKeeper"
+        mc:Ignorable="d"
+        Name="MainForm"
+        Title="Time Keeper"
+        Height="500"
+        Width="900" FontSize="14">
+    <Window.Resources>
+        <Style TargetType="TextBox">
+            <Setter Property="Height" Value="26"/>
+            <Setter Property="Width" Value="70"/>
+            <Setter Property="Margin" Value="3,0,0,0"/>
+            <Setter Property="Padding" Value="0,3,0,0"/>
+            <Setter Property="TextAlignment" Value="Right"/>
+        </Style>
+        <Style TargetType="Button">
+            <Setter Property="Padding" Value="3,3,3,3"/>
+            <Setter Property="Height" Value="26"/>
+            <Setter Property="Width" Value="Auto"/>
+        </Style>
+        <Style x:Key="TaskNameStyle" TargetType="Label">
+            <Setter Property="Width" Value="230"/>
+            <Setter Property="Margin" Value="5,0,0,0"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+        </Style>
+        <Style x:Key="DaySumStyle" TargetType="TextBlock">
+            <Setter Property="Width" Value="70"/>
+            <Setter Property="Padding" Value="0,0,2,0"/>
+            <Setter Property="Margin" Value="3,0,0,0"/>
+            <Setter Property="TextAlignment" Value="Right"/>
+        </Style>
+        <Style x:Key="HeaderStyle" TargetType="Label">
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Width" Value="70"/>
+            <Setter Property="Margin" Value="3,0,0,0"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+        </Style>
+    </Window.Resources>
+    <Grid>
+        <StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="0,5,0,0" VerticalAlignment="Top">
+                <Label Content="Week commencing:"/>
+                <DatePicker Name="WeekCommencingPicker" Width="120" Height="28" SelectedDateChanged="WeekCommencingPicker_SelectedDateChanged"/>
+                <Label Margin="10,0,0,0" Content="Available tasks:"/>
+                <ComboBox Name="AvailableTasksCmb" Width="250" Height="26"/>
+                <Button Margin="5,0,0,0" Content="Add to grid" Click="AddTaskBtn_Click"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="0,8,0,0">
+                <Label Style="{StaticResource HeaderStyle}" Width="230" Margin="5,0,0,0" Content="Task"/>
+                <Label Style="{StaticResource HeaderStyle}" Content="Sun"/>
+                <Label Style="{StaticResource HeaderStyle}" Content="Mon"/>
+                <Label Style="{StaticResource HeaderStyle}" Content="Tue"/>
+                <Label Style="{StaticResource HeaderStyle}" Content="Wed"/>
+                <Label Style="{StaticResource HeaderStyle}" Content="Thu"/>
+                <Label Style="{StaticResource HeaderStyle}" Content="Fri"/>
+                <Label Style="{StaticResource HeaderStyle}" Content="Sat"/>
+            </StackPanel>
+            
+            <StackPanel Name="Task0" Orientation="Horizontal" Height="30" VerticalAlignment="Top">
+                <Label Name="TaskName0" Style="{StaticResource TaskNameStyle}" Content="Task 1"/>
+                <TextBox Name="Tb00" Text="0.00" LostFocus="Tb_LostFocus"/>
+                <TextBox Name="Tb01" Text="0.00" LostFocus="Tb_LostFocus"/>
+                <TextBox Name="Tb02" Text="0.00" LostFocus="Tb_LostFocus"/>
+                <TextBox Name="Tb03" Text="0.00" LostFocus="Tb_LostFocus"/>
+                <TextBox Name="Tb04" Text="0.00" LostFocus="Tb_LostFocus"/>
+                <TextBox Name="Tb05" Text="0.00" LostFocus="Tb_LostFocus"/>
+                <TextBox Name="Tb06" Text="0.00" LostFocus="Tb_LostFocus"/>
+                <TextBlock Name="TaskSum0" Width="50" Margin="5,0,0,0" VerticalAlignment="Center" Text="0.00"/>
+                <Button Name="TimerBtn0" Content="Start timer"/>
+            </StackPanel>
+            <StackPanel Name="Task1" Orientation="Horizontal" Height="30" VerticalAlignment="Top">
+                <Label Name="TaskName1" Style="{StaticResource TaskNameStyle}" Content="Task 1"/>
+                <TextBox Name="Tb10" Text="0.00" LostFocus="Tb_LostFocus"/>
+                <TextBox Name="Tb11" Text="0.00" LostFocus="Tb_LostFocus"/>
+                <TextBox Name="Tb12" Text="0.00" LostFocus="Tb_LostFocus"/>
+                <TextBox Name="Tb13" Text="0.00" LostFocus="Tb_LostFocus"/>
+                <TextBox Name="Tb14" Text="0.00" LostFocus="Tb_LostFocus"/>
+                <TextBox Name="Tb15" Text="0.00" LostFocus="Tb_LostFocus"/>
+                <TextBox Name="Tb16" Text="0.00" LostFocus="Tb_LostFocus"/>
+                <TextBlock Name="TaskSum1" Width="50" Margin="5,0,0,0" VerticalAlignment="Center" Text="0.00"/>
+                <Button Name="TimerBtn1" Content="Start timer"/>
+            </StackPanel>
+            <StackPanel Name="Task2" Orientation="Horizontal" Height="30" VerticalAlignment="Top">
+                <Label Name="TaskName2" Style="{StaticResource TaskNameStyle}" Content="Task 1"/>
+                <TextBox Name="Tb20" Text="0.00" LostFocus="Tb_LostFocus"/>
+                <TextBox Name="Tb21" Text="0.00" LostFocus="Tb_LostFocus"/>
+                <TextBox Name="Tb22" Text="0.00" LostFocus="Tb_LostFocus"/>
+                <TextBox Name="Tb23" Text="0.00" LostFocus="Tb_LostFocus"/>
+                <TextBox Name="Tb24" Text="0.00" LostFocus="Tb_LostFocus"/>
+                <TextBox Name="Tb25" Text="0.00" LostFocus="Tb_LostFocus"/>
+                <TextBox Name="Tb26" Text="0.00" LostFocus="Tb_LostFocus"/>
+                <TextBlock Name="TaskSum2" Width="50" Margin="5,0,0,0" VerticalAlignment="Center" Text="0.00"/>
+                <Button Name="TimerBtn2" Content="Start timer"/>
+            </StackPanel>
+            <StackPanel Name="Task3" Orientation="Horizontal" Height="30" VerticalAlignment="Top">
+                <Label Name="TaskName3" Style="{StaticResource TaskNameStyle}" Content="Task 1"/>
+                <TextBox Name="Tb30" Text="0.00" LostFocus="Tb_LostFocus"/>
+                <TextBox Name="Tb31" Text="0.00" LostFocus="Tb_LostFocus"/>
+                <TextBox Name="Tb32" Text="0.00" LostFocus="Tb_LostFocus"/>
+                <TextBox Name="Tb33" Text="0.00" LostFocus="Tb_LostFocus"/>
+                <TextBox Name="Tb34" Text="0.00" LostFocus="Tb_LostFocus"/>
+                <TextBox Name="Tb35" Text="0.00" LostFocus="Tb_LostFocus"/>
+                <TextBox Name="Tb36" Text="0.00" LostFocus="Tb_LostFocus"/>
+                <TextBlock Name="TaskSum3" Width="50" Margin="5,0,0,0" VerticalAlignment="Center" Text="0.00"/>
+                <Button Name="TimerBtn3" Content="Start timer"/>
+            </StackPanel>
+            <StackPanel Name="Task4" Orientation="Horizontal" Height="30" VerticalAlignment="Top">
+                <Label Name="TaskName4" Style="{StaticResource TaskNameStyle}" Content="Task 1"/>
+                <TextBox Name="Tb40" Text="0.00" LostFocus="Tb_LostFocus"/>
+                <TextBox Name="Tb41" Text="0.00" LostFocus="Tb_LostFocus"/>
+                <TextBox Name="Tb42" Text="0.00" LostFocus="Tb_LostFocus"/>
+                <TextBox Name="Tb43" Text="0.00" LostFocus="Tb_LostFocus"/>
+                <TextBox Name="Tb44" Text="0.00" LostFocus="Tb_LostFocus"/>
+                <TextBox Name="Tb45" Text="0.00" LostFocus="Tb_LostFocus"/>
+                <TextBox Name="Tb46" Text="0.00" LostFocus="Tb_LostFocus"/>
+                <TextBlock Name="TaskSum4" Width="50" Margin="5,0,0,0" VerticalAlignment="Center" Text="0.00"/>
+                <Button Name="TimerBtn4" Content="Start timer"/>
+            </StackPanel>
+            <StackPanel Name="Task5" Orientation="Horizontal" Height="30" VerticalAlignment="Top">
+                <Label Name="TaskName5" Style="{StaticResource TaskNameStyle}" Content="Task 1"/>
+                <TextBox Name="Tb50" Text="0.00" LostFocus="Tb_LostFocus"/>
+                <TextBox Name="Tb51" Text="0.00" LostFocus="Tb_LostFocus"/>
+                <TextBox Name="Tb52" Text="0.00" LostFocus="Tb_LostFocus"/>
+                <TextBox Name="Tb53" Text="0.00" LostFocus="Tb_LostFocus"/>
+                <TextBox Name="Tb54" Text="0.00" LostFocus="Tb_LostFocus"/>
+                <TextBox Name="Tb55" Text="0.00" LostFocus="Tb_LostFocus"/>
+                <TextBox Name="Tb56" Text="0.00" LostFocus="Tb_LostFocus"/>
+                <TextBlock Name="TaskSum5" Width="50" Margin="5,0,0,0" VerticalAlignment="Center" Text="0.00"/>
+                <Button Name="TimerBtn5" Content="Start timer"/>
+            </StackPanel>
+            <StackPanel Name="Task6" Orientation="Horizontal" Height="30" VerticalAlignment="Top">
+                <Label Name="TaskName6" Style="{StaticResource TaskNameStyle}" Content="Task 1"/>
+                <TextBox Name="Tb60" Text="0.00" LostFocus="Tb_LostFocus"/>
+                <TextBox Name="Tb61" Text="0.00" LostFocus="Tb_LostFocus"/>
+                <TextBox Name="Tb62" Text="0.00" LostFocus="Tb_LostFocus"/>
+                <TextBox Name="Tb63" Text="0.00" LostFocus="Tb_LostFocus"/>
+                <TextBox Name="Tb64" Text="0.00" LostFocus="Tb_LostFocus"/>
+                <TextBox Name="Tb65" Text="0.00" LostFocus="Tb_LostFocus"/>
+                <TextBox Name="Tb66" Text="0.00" LostFocus="Tb_LostFocus"/>
+                <TextBlock Name="TaskSum6" Width="50" Margin="5,0,0,0" VerticalAlignment="Center" Text="0.00"/>
+                <Button Name="TimerBtn6" Content="Start timer"/>
+            </StackPanel>
+            <StackPanel Name="Task7" Orientation="Horizontal" Height="30" VerticalAlignment="Top">
+                <Label Name="TaskName7" Style="{StaticResource TaskNameStyle}" Content="Task 1"/>
+                <TextBox Name="Tb70" Text="0.00" LostFocus="Tb_LostFocus"/>
+                <TextBox Name="Tb71" Text="0.00" LostFocus="Tb_LostFocus"/>
+                <TextBox Name="Tb72" Text="0.00" LostFocus="Tb_LostFocus"/>
+                <TextBox Name="Tb73" Text="0.00" LostFocus="Tb_LostFocus"/>
+                <TextBox Name="Tb74" Text="0.00" LostFocus="Tb_LostFocus"/>
+                <TextBox Name="Tb75" Text="0.00" LostFocus="Tb_LostFocus"/>
+                <TextBox Name="Tb76" Text="0.00" LostFocus="Tb_LostFocus"/>
+                <TextBlock Name="TaskSum7" Width="50" Margin="5,0,0,0" VerticalAlignment="Center" Text="0.00"/>
+                <Button Name="TimerBtn7" Content="Start timer"/>
+            </StackPanel>
+            <StackPanel Name="Task8" Orientation="Horizontal" Height="30" VerticalAlignment="Top">
+                <Label Name="TaskName8" Style="{StaticResource TaskNameStyle}" Content="Task 1"/>
+                <TextBox Name="Tb80" Text="0.00" LostFocus="Tb_LostFocus"/>
+                <TextBox Name="Tb81" Text="0.00" LostFocus="Tb_LostFocus"/>
+                <TextBox Name="Tb82" Text="0.00" LostFocus="Tb_LostFocus"/>
+                <TextBox Name="Tb83" Text="0.00" LostFocus="Tb_LostFocus"/>
+                <TextBox Name="Tb84" Text="0.00" LostFocus="Tb_LostFocus"/>
+                <TextBox Name="Tb85" Text="0.00" LostFocus="Tb_LostFocus"/>
+                <TextBox Name="Tb86" Text="0.00" LostFocus="Tb_LostFocus"/>
+                <TextBlock Name="TaskSum8" Width="50" Margin="5,0,0,0" VerticalAlignment="Center" Text="0.00"/>
+                <Button Name="TimerBtn8" Content="Start timer"/>
+            </StackPanel>
+            <StackPanel Name="Task9" Orientation="Horizontal" Height="30" VerticalAlignment="Top">
+                <Label Name="TaskName9" Style="{StaticResource TaskNameStyle}" Content="Task 1"/>
+                <TextBox Name="Tb90" Text="0.00" LostFocus="Tb_LostFocus"/>
+                <TextBox Name="Tb91" Text="0.00" LostFocus="Tb_LostFocus"/>
+                <TextBox Name="Tb92" Text="0.00" LostFocus="Tb_LostFocus"/>
+                <TextBox Name="Tb93" Text="0.00" LostFocus="Tb_LostFocus"/>
+                <TextBox Name="Tb94" Text="0.00" LostFocus="Tb_LostFocus"/>
+                <TextBox Name="Tb95" Text="0.00" LostFocus="Tb_LostFocus"/>
+                <TextBox Name="Tb96" Text="0.00" LostFocus="Tb_LostFocus"/>
+                <TextBlock Name="TaskSum9" Width="50" Margin="5,0,0,0" VerticalAlignment="Center" Text="0.00"/>
+                <Button Name="TimerBtn9" Content="Start timer"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Name="DaySum0" Style="{StaticResource DaySumStyle}" Margin="238,0,0,0" Text="0.00"/>
+                <TextBlock Name="DaySum1" Style="{StaticResource DaySumStyle}" Text="0.00"/>
+                <TextBlock Name="DaySum2" Style="{StaticResource DaySumStyle}" Text="0.00"/>
+                <TextBlock Name="DaySum3" Style="{StaticResource DaySumStyle}" Text="0.00"/>
+                <TextBlock Name="DaySum4" Style="{StaticResource DaySumStyle}" Text="0.00"/>
+                <TextBlock Name="DaySum5" Style="{StaticResource DaySumStyle}" Text="0.00"/>
+                <TextBlock Name="DaySum6" Style="{StaticResource DaySumStyle}" Text="0.00"/>
+                <TextBlock Name="WeekTotal" Width="50" Margin="5,0,0,0" VerticalAlignment="Center" Text="0.00"/>
+            </StackPanel>
+        </StackPanel>
+    </Grid>
+</Window>
