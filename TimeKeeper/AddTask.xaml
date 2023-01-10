@@ -1,0 +1,49 @@
+﻿<Window x:Class="TimeKeeper.AddTask"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:TimeKeeper"
+        mc:Ignorable="d"
+        Title="Add New Task"
+        Width="400"
+        Height="250"
+        FontSize="14"
+        WindowStartupLocation="CenterScreen">
+    <Grid>
+        <Label HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,10,0,0" Content="Name:" />
+        <TextBox HorizontalAlignment="Left"
+                 VerticalAlignment="Top"
+                 Width="250" Height="26"
+                 Margin="70,10,0,0"
+                 TextWrapping="NoWrap"
+                 VerticalContentAlignment="Center"
+                 Name="TaskNameTb"
+                 Text="Task name"/>
+        <Label HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,50,0,0" Content="Code:"/>
+        <TextBox HorizontalAlignment="Left"
+                 VerticalAlignment="Top"
+                 Width="100" Height="26"
+                 Margin="70,50,0,0"
+                 TextWrapping="NoWrap"
+                 VerticalContentAlignment="Center"
+                 Name="TaskCodeTb"
+                 Text=""/>
+        <Button HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                Width="70"
+                Height="30"
+                Margin="100,90,0,0"
+                IsCancel="True"
+                Content="Cancel"
+                Click="CancelBtn_Click"/>
+        <Button HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                Width="70"
+                Height="30"
+                Margin="180,90,0,0"
+                IsDefault="True"
+                Content="Save"
+                Click="OkBtn_Click"/>
+    </Grid>
+</Window>

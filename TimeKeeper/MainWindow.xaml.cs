@@ -1,35 +1,38 @@
-﻿using System;
+﻿using Microsoft.Data.Sqlite;
+using System;
+using System.Diagnostics;
+using System.IO;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
+using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Threading;
 
 namespace TimeKeeper;
 
 public partial class MainWindow : Window
 {
+    private const string START_TIMER = "Start timer";
+    private const string STOP_TIMER = "Stop timer";
+    private const string ACTIVE_STYLE = "TimingActiveStyle";
+    private const string INACTIVE_STYLE = "TimingInactiveStyle";
     private const string ConnStr = "Data Source=C:\\Users\\bftro\\AppData\\Local\\TimeKeeper\\TimeKeeper.sqlite";
     private readonly WeekTimeWorked WeekTimeWorked;
-    private readonly Tasks AvailableTasks = new();
+    private Task[] AvailableTasks;
     private TaskTimeWorked? TimedTask;
-    private DateTime? TimedTaskStartTime;
     private Button? TimedTaskButton;
     private TextBox? TimedTaskTextBox;
+    private DispatcherTimer? TaskTimer;
+    private IDataStore DataStore;
 
     public MainWindow()
     {
         InitializeComponent();
-        WeekTimeWorked = new()
-        {
-            ConnStr = ConnStr,
-        };
+        DataStore = new Database();
+        DataStore.CreateStore();
+        WeekTimeWorked = new(DataStore);
         WeekCommencingPicker.SelectedDate = DateTime.Now;
-        UpdateTaskList();
-    }
-
-    private void UpdateTaskList()
-    {
-        AvailableTasks.LoadFromDatabase();
+        AvailableTasks = DataStore.GetAllTasks();
         AvailableTasksCmb.ItemsSource = AvailableTasks;
     }
 
@@ -141,7 +144,7 @@ public partial class MainWindow : Window
 
     private void Tb_LostFocus(object sender, RoutedEventArgs e)
     {
-        if (sender is TextBox tb && tb.Text.Length > 0)
+        if (sender is TextBox tb)
         {
             double hours;
             try
@@ -160,16 +163,19 @@ public partial class MainWindow : Window
             DateTime dateWorked = WeekTimeWorked.WeekCommencing.AddDays(col);
             task.SetTimeWorked(dateWorked, hours);
             UpdateGrid();
-            WeekTimeWorked.SaveToDatabase();
+            WeekTimeWorked.Save();
         }
     }
 
-    private double ParseTimeEntry(string entry)
+    private static double ParseTimeEntry(string entry)
     {
         string timePattern = @"(\d{0,2}):(\d{2})";
         string numberPattern = @"^\d*\.?\d+$";
+        if (entry.Length == 0)
+        {
+            return 0;
+        }
         Match matchTime = Regex.Match(entry, timePattern, RegexOptions.IgnoreCase);
-        double result;
         if (matchTime.Success)
         {
             int hours = 0;
@@ -183,24 +189,20 @@ public partial class MainWindow : Window
                 minutes = int.Parse(matchTime.Groups[2].Value);
             }
             TimeSpan span = new(hours, minutes, 0);
-            result = span.TotalHours;
+            return span.TotalHours;
+        }
+        Match matchDecimal = Regex.Match(entry, numberPattern, RegexOptions.IgnoreCase);
+        if (matchDecimal.Success)
+        {
+            return double.Parse(entry);
         }
         else
         {
-            Match matchDecimal = Regex.Match(entry, numberPattern, RegexOptions.IgnoreCase);
-            if (matchDecimal.Success)
-            {
-                result = double.Parse(entry);
-            }
-            else
-            {
-                throw new Exception("Invalid input format");
-            }
+            throw new Exception("Invalid input format");
         }
-        return result;
     }
 
-    private string FormatHoursAsTime(double hours)
+    private static string FormatHoursAsTime(double hours)
     {
         return hours > 0 ? TimeSpan.FromMinutes(Math.Round(60 * hours)).ToString("h\\:mm") : "";
     }
@@ -222,6 +224,98 @@ public partial class MainWindow : Window
                     UpdateGrid();
                 }
             }
+        }
+    }
+
+    private void TimerBtn_Click(object sender, RoutedEventArgs e)
+    {
+        if (sender is Button btn)
+        {
+            TaskTimeWorked ttw = (TaskTimeWorked)btn.Tag;
+            if (btn.Content.ToString() == START_TIMER)
+            {
+                // If this is the first time timing is used, create the timer.
+                if (TaskTimer is null)
+                {
+                    TaskTimer = new()
+                    {
+                        Interval = TimeSpan.FromSeconds(10)
+                    };
+                    TaskTimer.Tick += TaskTimer_Tick;
+                }
+
+                // If a task is already being timed, stop timing it.
+                if (TaskTimer.IsEnabled && TimedTask != null && TimedTaskTextBox != null && TimedTaskButton != null)
+                {
+                    TaskTimer.IsEnabled = false;
+                    TimedTask.StopTiming(DateTime.Now);
+                    if (FindResource(INACTIVE_STYLE) is Style style)
+                    {
+                        TimedTaskTextBox.Style = style;
+                    }
+                    TimedTaskButton.Content = START_TIMER;
+                }
+
+                // Start timing the selected task.
+                TimedTask = ttw;
+                TimedTaskButton = btn;
+                int i = int.Parse(btn.Name[^1..]);
+                int j = (int)DateTime.Now.DayOfWeek;
+                if (MainForm.FindName($"Tb{i}{j}") is TextBox tb)
+                {
+                    if (FindResource(ACTIVE_STYLE) is Style style)
+                    {
+                        tb.Style = style;
+                    }
+                    tb.Text = "0:00";
+                    TimedTaskTextBox = tb;
+                }
+                TimedTask.StartTiming(DateTime.Now);
+                btn.Content = STOP_TIMER;
+                TaskTimer.IsEnabled = true;
+            }
+            else
+            {
+                // Stop timing the selected task.
+                if (TaskTimer != null && TimedTask != null && TimedTaskTextBox != null)
+                {
+                    // Already timing a task so stop timing that one.
+                    TaskTimer.IsEnabled = false;
+                    TimedTask.StopTiming(DateTime.Now);
+                    if (FindResource(INACTIVE_STYLE) is Style style)
+                    {
+                        TimedTaskTextBox.Style = style;
+                    }
+                }
+                btn.Content = START_TIMER;
+            }
+            UpdateGrid();
+        }
+    }
+
+    private void TaskTimer_Tick(object? sender, EventArgs e)
+    {
+        if (TimedTask != null)
+        {
+            TimedTask.UpdateTiming(DateTime.Now);
+            WeekTimeWorked.Save();
+            UpdateGrid();
+        }
+    }
+
+    private void CreateTaskBtn_Click(object sender, RoutedEventArgs e)
+    {
+        AddTask addTaskForm = new();
+        var result = addTaskForm.ShowDialog();
+        if (result.HasValue && result.Value == true)
+        {
+            Task task = new()
+            {
+                Name = addTaskForm.TaskNameTb.Text,
+                Code = addTaskForm.TaskCodeTb.Text,
+            };
+            DataStore.AddNewTask(task);
+            AvailableTasksCmb.ItemsSource = DataStore.GetAllTasks();
         }
     }
 }

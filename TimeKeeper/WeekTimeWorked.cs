@@ -7,7 +7,12 @@ namespace TimeKeeper;
 
 internal class WeekTimeWorked
 {
-    public string ConnStr { get; set; } = "Data Source=C:\\Users\\bftro\\AppData\\Local\\TimeKeeper\\TimeKeeper.sqlite";
+    public WeekTimeWorked(IDataStore ds)
+    {
+        Database = ds;
+    }
+
+    public IDataStore Database { get; }
 
     private DateTime _WeekCommencing = GetWeekCommencing(DateTime.Now);
     public DateTime WeekCommencing
@@ -16,7 +21,7 @@ internal class WeekTimeWorked
         set
         {
             _WeekCommencing = GetWeekCommencing(value);
-            LoadFromDatabase();
+            Database.GetWeekTimeWorked(this);
         }
     }
 
@@ -57,71 +62,9 @@ internal class WeekTimeWorked
         get => TaskTotals.Sum();
     }
 
-    public void LoadFromDatabase()
+    public void Save()
     {
-        string sql =
-            "SELECT tasks.name, time.date, time.time_worked, tasks.id " +
-            "FROM tasks JOIN time ON tasks.id = time.task_id " +
-            "WHERE time.date >= $start AND time.date < $end";
-        using var connection = new SqliteConnection(ConnStr);
-        connection.Open();
-        var command = connection.CreateCommand();
-        command.CommandText = sql;
-        command.Parameters.AddWithValue("$start", WeekCommencing.ToString("yyyy-MM-dd"));
-        command.Parameters.AddWithValue("$end", WeekCommencing.AddDays(7).ToString("yyyy-MM-dd"));
-        using var reader = command.ExecuteReader();
-        _Tasks.Clear();
-        while (reader.Read())
-        {
-            var taskId = reader.GetInt32(3);
-            TaskTimeWorked ttw;
-            if (Tasks.ContainsKey(taskId))
-            {
-                ttw = Tasks[taskId];
-            }
-            else
-            {
-                ttw = new()
-                {
-                    TaskName = reader.GetString(0),
-                    TaskId = taskId,
-                };
-                Tasks[taskId] = ttw;
-            }
-            DateTime dt = DateTime.Parse(reader.GetString(1));
-            double timeWorked = reader.GetDouble(2);
-            ttw.SetTimeWorked(dt, timeWorked);
-        }
-    }
-
-    public void SaveToDatabase()
-    {
-        string sql = 
-            "INSERT INTO time (task_id, date, time_worked) " +
-            "VALUES ($tid, $dt, $tw) " +
-            "ON CONFLICT (task_id, date) DO UPDATE SET time_worked = excluded.time_worked";
-        using var connection = new SqliteConnection(ConnStr);
-        connection.Open();
-        var command = connection.CreateCommand();
-        command.CommandText = sql;
-        command.Parameters.AddWithValue("$tid", 1);
-        command.Parameters.AddWithValue("$dt", "");
-        command.Parameters.AddWithValue("$tw", 1.1);
-        foreach (var kvp in Tasks)
-        {
-            command.Parameters["$tid"].Value = kvp.Key;
-            for (int j = 0; j < 7; j++)
-            {
-                double timeWorked = kvp.Value.GetTimeWorked((DayOfWeek)j);
-                if (timeWorked > 0)
-                {
-                    command.Parameters["$tw"].Value = timeWorked;
-                    DateTime taskDate = WeekCommencing.AddDays(j);
-                    command.Parameters["$dt"].Value = taskDate.ToString("yyyy-MM-dd");
-                    command.ExecuteNonQuery();
-                }
-            }
-        }
+        Database.SaveWeekTimeWorked(this);
     }
 
     public static DateTime GetWeekCommencing(DateTime dt)
