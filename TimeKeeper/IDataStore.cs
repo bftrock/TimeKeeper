@@ -1,6 +1,6 @@
 ﻿namespace TimeKeeper;
 
-internal interface IDataStore
+public interface IDataStore
 {
     void CreateStore();
     void GetWeekTimeWorked(WeekTimeWorked wtw);

@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace TimeKeeper;
 
-internal class WeekTimeWorked
+public class WeekTimeWorked
 {
     public WeekTimeWorked(IDataStore ds)
     {
@@ -25,8 +25,8 @@ internal class WeekTimeWorked
         }
     }
 
-    private Dictionary<int, TaskTimeWorked> _Tasks = new();
-    public Dictionary<int, TaskTimeWorked> Tasks
+    private Dictionary<int, Task> _Tasks = new();
+    public Dictionary<int, Task> Tasks
     {
         get => _Tasks;
         set

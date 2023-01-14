@@ -2,11 +2,10 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Windows.Documents;
 
 namespace TimeKeeper;
 
-internal class Database : IDataStore
+public class Database : IDataStore
 {
     public Database()
     {
@@ -121,33 +120,25 @@ internal class Database : IDataStore
         wtw.Tasks.Clear();
         while (reader.Read())
         {
-            string taskCode = reader.GetString(reader.GetOrdinal("code"));
-            string taskName = reader.GetString(reader.GetOrdinal("name"));
-            string fullTaskName;
-            if (taskCode.Length > 0)
+            int id = reader.GetInt32(reader.GetOrdinal("id"));
+            string code = reader.GetString(reader.GetOrdinal("code"));
+            string name = reader.GetString(reader.GetOrdinal("name"));
+            Task task;
+            if (wtw.Tasks.ContainsKey(id))
             {
-                fullTaskName = $"({taskCode}) {taskName}";
+                task = wtw.Tasks[id];
             }
             else
             {
-                fullTaskName = taskName;
-            }
-            int taskId = reader.GetInt32(reader.GetOrdinal("id"));
-            TaskTimeWorked ttw;
-            if (wtw.Tasks.ContainsKey(taskId))
-            {
-                ttw = wtw.Tasks[taskId];
-            }
-            else
-            {
-                ttw = new()
+                task = new()
                 {
-                    TaskId = taskId,
-                    TaskName = fullTaskName,
+                    Id = id,
+                    Name = name,
+                    Code = code,
                 };
-                wtw.Tasks.Add(ttw.TaskId, ttw);
+                wtw.Tasks.Add(task.Id, task);
             }
-            ttw.AddTimeWorked(
+            task.AddTimeWorked(
                 DateTime.Parse(reader.GetString(reader.GetOrdinal("date"))),
                 reader.GetDouble(reader.GetOrdinal("time_worked")));
         }

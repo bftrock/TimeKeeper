@@ -60,6 +60,7 @@
                 <ComboBox Name="AvailableTasksCmb" Width="250" Height="26"/>
                 <Button Margin="5,0,0,0" Content="Add to grid" Click="AddTaskBtn_Click"/>
                 <Button Margin="5,0,0,0" Content="Create new task" Click="CreateTaskBtn_Click"/>
+                <Button Margin="5,0,0,0" Content="Summary" Click="Summary_Click"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal" Margin="0,8,0,0">
                 <Label Style="{StaticResource HeaderStyle}" Width="300" Margin="5,0,0,0" Content="Task"/>
@@ -74,133 +75,133 @@
             
             <StackPanel Name="Task0" Orientation="Horizontal" Height="30" VerticalAlignment="Top">
                 <Label Name="TaskName0" Style="{StaticResource TaskNameStyle}"/>
-                <TextBox Name="Tb00" Style="{StaticResource TimingInactiveStyle}" Text="0.00" LostFocus="Tb_LostFocus"/>
-                <TextBox Name="Tb01" Style="{StaticResource TimingInactiveStyle}" Text="0.00" LostFocus="Tb_LostFocus"/>
-                <TextBox Name="Tb02" Style="{StaticResource TimingInactiveStyle}" Text="0.00" LostFocus="Tb_LostFocus"/>
-                <TextBox Name="Tb03" Style="{StaticResource TimingInactiveStyle}" Text="0.00" LostFocus="Tb_LostFocus"/>
-                <TextBox Name="Tb04" Style="{StaticResource TimingInactiveStyle}" Text="0.00" LostFocus="Tb_LostFocus"/>
-                <TextBox Name="Tb05" Style="{StaticResource TimingInactiveStyle}" Text="0.00" LostFocus="Tb_LostFocus"/>
-                <TextBox Name="Tb06" Style="{StaticResource TimingInactiveStyle}" Text="0.00" LostFocus="Tb_LostFocus"/>
-                <TextBlock Name="TaskSum0" Width="50" Margin="5,0,0,0" VerticalAlignment="Center" Text="0.00"/>
+                <TextBox Name="Tb00" Style="{StaticResource TimingInactiveStyle}" LostFocus="Tb_LostFocus"/>
+                <TextBox Name="Tb01" Style="{StaticResource TimingInactiveStyle}" LostFocus="Tb_LostFocus"/>
+                <TextBox Name="Tb02" Style="{StaticResource TimingInactiveStyle}" LostFocus="Tb_LostFocus"/>
+                <TextBox Name="Tb03" Style="{StaticResource TimingInactiveStyle}" LostFocus="Tb_LostFocus"/>
+                <TextBox Name="Tb04" Style="{StaticResource TimingInactiveStyle}" LostFocus="Tb_LostFocus"/>
+                <TextBox Name="Tb05" Style="{StaticResource TimingInactiveStyle}" LostFocus="Tb_LostFocus"/>
+                <TextBox Name="Tb06" Style="{StaticResource TimingInactiveStyle}" LostFocus="Tb_LostFocus"/>
+                <TextBlock Name="TaskSum0" Width="50" Margin="5,0,0,0" VerticalAlignment="Center"/>
                 <Button Name="TimerBtn0" Content="Start timer" Click="TimerBtn_Click"/>
             </StackPanel>
             <StackPanel Name="Task1" Orientation="Horizontal" Height="30" VerticalAlignment="Top">
                 <Label Name="TaskName1" Style="{StaticResource TaskNameStyle}"/>
-                <TextBox Name="Tb10" Style="{StaticResource TimingInactiveStyle}" Text="0.00" LostFocus="Tb_LostFocus"/>
-                <TextBox Name="Tb11" Style="{StaticResource TimingInactiveStyle}" Text="0.00" LostFocus="Tb_LostFocus"/>
-                <TextBox Name="Tb12" Style="{StaticResource TimingInactiveStyle}" Text="0.00" LostFocus="Tb_LostFocus"/>
-                <TextBox Name="Tb13" Style="{StaticResource TimingInactiveStyle}" Text="0.00" LostFocus="Tb_LostFocus"/>
-                <TextBox Name="Tb14" Style="{StaticResource TimingInactiveStyle}" Text="0.00" LostFocus="Tb_LostFocus"/>
-                <TextBox Name="Tb15" Style="{StaticResource TimingInactiveStyle}" Text="0.00" LostFocus="Tb_LostFocus"/>
-                <TextBox Name="Tb16" Style="{StaticResource TimingInactiveStyle}" Text="0.00" LostFocus="Tb_LostFocus"/>
-                <TextBlock Name="TaskSum1" Width="50" Margin="5,0,0,0" VerticalAlignment="Center" Text="0.00"/>
+                <TextBox Name="Tb10" Style="{StaticResource TimingInactiveStyle}" LostFocus="Tb_LostFocus"/>
+                <TextBox Name="Tb11" Style="{StaticResource TimingInactiveStyle}" LostFocus="Tb_LostFocus"/>
+                <TextBox Name="Tb12" Style="{StaticResource TimingInactiveStyle}" LostFocus="Tb_LostFocus"/>
+                <TextBox Name="Tb13" Style="{StaticResource TimingInactiveStyle}" LostFocus="Tb_LostFocus"/>
+                <TextBox Name="Tb14" Style="{StaticResource TimingInactiveStyle}" LostFocus="Tb_LostFocus"/>
+                <TextBox Name="Tb15" Style="{StaticResource TimingInactiveStyle}" LostFocus="Tb_LostFocus"/>
+                <TextBox Name="Tb16" Style="{StaticResource TimingInactiveStyle}" LostFocus="Tb_LostFocus"/>
+                <TextBlock Name="TaskSum1" Width="50" Margin="5,0,0,0" VerticalAlignment="Center"/>
                 <Button Name="TimerBtn1" Content="Start timer" Click="TimerBtn_Click"/>
             </StackPanel>
             <StackPanel Name="Task2" Orientation="Horizontal" Height="30" VerticalAlignment="Top">
                 <Label Name="TaskName2" Style="{StaticResource TaskNameStyle}"/>
-                <TextBox Name="Tb20" Style="{StaticResource TimingInactiveStyle}" Text="0.00" LostFocus="Tb_LostFocus"/>
-                <TextBox Name="Tb21" Style="{StaticResource TimingInactiveStyle}" Text="0.00" LostFocus="Tb_LostFocus"/>
-                <TextBox Name="Tb22" Style="{StaticResource TimingInactiveStyle}" Text="0.00" LostFocus="Tb_LostFocus"/>
-                <TextBox Name="Tb23" Style="{StaticResource TimingInactiveStyle}" Text="0.00" LostFocus="Tb_LostFocus"/>
-                <TextBox Name="Tb24" Style="{StaticResource TimingInactiveStyle}" Text="0.00" LostFocus="Tb_LostFocus"/>
-                <TextBox Name="Tb25" Style="{StaticResource TimingInactiveStyle}" Text="0.00" LostFocus="Tb_LostFocus"/>
-                <TextBox Name="Tb26" Style="{StaticResource TimingInactiveStyle}" Text="0.00" LostFocus="Tb_LostFocus"/>
-                <TextBlock Name="TaskSum2" Width="50" Margin="5,0,0,0" VerticalAlignment="Center" Text="0.00"/>
+                <TextBox Name="Tb20" Style="{StaticResource TimingInactiveStyle}" LostFocus="Tb_LostFocus"/>
+                <TextBox Name="Tb21" Style="{StaticResource TimingInactiveStyle}" LostFocus="Tb_LostFocus"/>
+                <TextBox Name="Tb22" Style="{StaticResource TimingInactiveStyle}" LostFocus="Tb_LostFocus"/>
+                <TextBox Name="Tb23" Style="{StaticResource TimingInactiveStyle}" LostFocus="Tb_LostFocus"/>
+                <TextBox Name="Tb24" Style="{StaticResource TimingInactiveStyle}" LostFocus="Tb_LostFocus"/>
+                <TextBox Name="Tb25" Style="{StaticResource TimingInactiveStyle}" LostFocus="Tb_LostFocus"/>
+                <TextBox Name="Tb26" Style="{StaticResource TimingInactiveStyle}" LostFocus="Tb_LostFocus"/>
+                <TextBlock Name="TaskSum2" Width="50" Margin="5,0,0,0" VerticalAlignment="Center"/>
                 <Button Name="TimerBtn2" Content="Start timer" Click="TimerBtn_Click"/>
             </StackPanel>
             <StackPanel Name="Task3" Orientation="Horizontal" Height="30" VerticalAlignment="Top">
                 <Label Name="TaskName3" Style="{StaticResource TaskNameStyle}"/>
-                <TextBox Name="Tb30" Style="{StaticResource TimingInactiveStyle}" Text="0.00" LostFocus="Tb_LostFocus"/>
-                <TextBox Name="Tb31" Style="{StaticResource TimingInactiveStyle}" Text="0.00" LostFocus="Tb_LostFocus"/>
-                <TextBox Name="Tb32" Style="{StaticResource TimingInactiveStyle}" Text="0.00" LostFocus="Tb_LostFocus"/>
-                <TextBox Name="Tb33" Style="{StaticResource TimingInactiveStyle}" Text="0.00" LostFocus="Tb_LostFocus"/>
-                <TextBox Name="Tb34" Style="{StaticResource TimingInactiveStyle}" Text="0.00" LostFocus="Tb_LostFocus"/>
-                <TextBox Name="Tb35" Style="{StaticResource TimingInactiveStyle}" Text="0.00" LostFocus="Tb_LostFocus"/>
-                <TextBox Name="Tb36" Style="{StaticResource TimingInactiveStyle}" Text="0.00" LostFocus="Tb_LostFocus"/>
-                <TextBlock Name="TaskSum3" Width="50" Margin="5,0,0,0" VerticalAlignment="Center" Text="0.00"/>
+                <TextBox Name="Tb30" Style="{StaticResource TimingInactiveStyle}" LostFocus="Tb_LostFocus"/>
+                <TextBox Name="Tb31" Style="{StaticResource TimingInactiveStyle}" LostFocus="Tb_LostFocus"/>
+                <TextBox Name="Tb32" Style="{StaticResource TimingInactiveStyle}" LostFocus="Tb_LostFocus"/>
+                <TextBox Name="Tb33" Style="{StaticResource TimingInactiveStyle}" LostFocus="Tb_LostFocus"/>
+                <TextBox Name="Tb34" Style="{StaticResource TimingInactiveStyle}" LostFocus="Tb_LostFocus"/>
+                <TextBox Name="Tb35" Style="{StaticResource TimingInactiveStyle}" LostFocus="Tb_LostFocus"/>
+                <TextBox Name="Tb36" Style="{StaticResource TimingInactiveStyle}" LostFocus="Tb_LostFocus"/>
+                <TextBlock Name="TaskSum3" Width="50" Margin="5,0,0,0" VerticalAlignment="Center"/>
                 <Button Name="TimerBtn3" Content="Start timer" Click="TimerBtn_Click"/>
             </StackPanel>
             <StackPanel Name="Task4" Orientation="Horizontal" Height="30" VerticalAlignment="Top">
                 <Label Name="TaskName4" Style="{StaticResource TaskNameStyle}"/>
-                <TextBox Name="Tb40" Style="{StaticResource TimingInactiveStyle}" Text="0.00" LostFocus="Tb_LostFocus"/>
-                <TextBox Name="Tb41" Style="{StaticResource TimingInactiveStyle}" Text="0.00" LostFocus="Tb_LostFocus"/>
-                <TextBox Name="Tb42" Style="{StaticResource TimingInactiveStyle}" Text="0.00" LostFocus="Tb_LostFocus"/>
-                <TextBox Name="Tb43" Style="{StaticResource TimingInactiveStyle}" Text="0.00" LostFocus="Tb_LostFocus"/>
-                <TextBox Name="Tb44" Style="{StaticResource TimingInactiveStyle}" Text="0.00" LostFocus="Tb_LostFocus"/>
-                <TextBox Name="Tb45" Style="{StaticResource TimingInactiveStyle}" Text="0.00" LostFocus="Tb_LostFocus"/>
-                <TextBox Name="Tb46" Style="{StaticResource TimingInactiveStyle}" Text="0.00" LostFocus="Tb_LostFocus"/>
-                <TextBlock Name="TaskSum4" Width="50" Margin="5,0,0,0" VerticalAlignment="Center" Text="0.00"/>
+                <TextBox Name="Tb40" Style="{StaticResource TimingInactiveStyle}" LostFocus="Tb_LostFocus"/>
+                <TextBox Name="Tb41" Style="{StaticResource TimingInactiveStyle}" LostFocus="Tb_LostFocus"/>
+                <TextBox Name="Tb42" Style="{StaticResource TimingInactiveStyle}" LostFocus="Tb_LostFocus"/>
+                <TextBox Name="Tb43" Style="{StaticResource TimingInactiveStyle}" LostFocus="Tb_LostFocus"/>
+                <TextBox Name="Tb44" Style="{StaticResource TimingInactiveStyle}" LostFocus="Tb_LostFocus"/>
+                <TextBox Name="Tb45" Style="{StaticResource TimingInactiveStyle}" LostFocus="Tb_LostFocus"/>
+                <TextBox Name="Tb46" Style="{StaticResource TimingInactiveStyle}" LostFocus="Tb_LostFocus"/>
+                <TextBlock Name="TaskSum4" Width="50" Margin="5,0,0,0" VerticalAlignment="Center"/>
                 <Button Name="TimerBtn4" Content="Start timer" Click="TimerBtn_Click"/>
             </StackPanel>
             <StackPanel Name="Task5" Orientation="Horizontal" Height="30" VerticalAlignment="Top">
                 <Label Name="TaskName5" Style="{StaticResource TaskNameStyle}"/>
-                <TextBox Name="Tb50" Style="{StaticResource TimingInactiveStyle}" Text="0.00" LostFocus="Tb_LostFocus"/>
-                <TextBox Name="Tb51" Style="{StaticResource TimingInactiveStyle}" Text="0.00" LostFocus="Tb_LostFocus"/>
-                <TextBox Name="Tb52" Style="{StaticResource TimingInactiveStyle}" Text="0.00" LostFocus="Tb_LostFocus"/>
-                <TextBox Name="Tb53" Style="{StaticResource TimingInactiveStyle}" Text="0.00" LostFocus="Tb_LostFocus"/>
-                <TextBox Name="Tb54" Style="{StaticResource TimingInactiveStyle}" Text="0.00" LostFocus="Tb_LostFocus"/>
-                <TextBox Name="Tb55" Style="{StaticResource TimingInactiveStyle}" Text="0.00" LostFocus="Tb_LostFocus"/>
-                <TextBox Name="Tb56" Style="{StaticResource TimingInactiveStyle}" Text="0.00" LostFocus="Tb_LostFocus"/>
-                <TextBlock Name="TaskSum5" Width="50" Margin="5,0,0,0" VerticalAlignment="Center" Text="0.00"/>
+                <TextBox Name="Tb50" Style="{StaticResource TimingInactiveStyle}" LostFocus="Tb_LostFocus"/>
+                <TextBox Name="Tb51" Style="{StaticResource TimingInactiveStyle}" LostFocus="Tb_LostFocus"/>
+                <TextBox Name="Tb52" Style="{StaticResource TimingInactiveStyle}" LostFocus="Tb_LostFocus"/>
+                <TextBox Name="Tb53" Style="{StaticResource TimingInactiveStyle}" LostFocus="Tb_LostFocus"/>
+                <TextBox Name="Tb54" Style="{StaticResource TimingInactiveStyle}" LostFocus="Tb_LostFocus"/>
+                <TextBox Name="Tb55" Style="{StaticResource TimingInactiveStyle}" LostFocus="Tb_LostFocus"/>
+                <TextBox Name="Tb56" Style="{StaticResource TimingInactiveStyle}" LostFocus="Tb_LostFocus"/>
+                <TextBlock Name="TaskSum5" Width="50" Margin="5,0,0,0" VerticalAlignment="Center"/>
                 <Button Name="TimerBtn5" Content="Start timer" Click="TimerBtn_Click"/>
             </StackPanel>
             <StackPanel Name="Task6" Orientation="Horizontal" Height="30" VerticalAlignment="Top">
                 <Label Name="TaskName6" Style="{StaticResource TaskNameStyle}"/>
-                <TextBox Name="Tb60" Style="{StaticResource TimingInactiveStyle}" Text="0.00" LostFocus="Tb_LostFocus"/>
-                <TextBox Name="Tb61" Style="{StaticResource TimingInactiveStyle}" Text="0.00" LostFocus="Tb_LostFocus"/>
-                <TextBox Name="Tb62" Style="{StaticResource TimingInactiveStyle}" Text="0.00" LostFocus="Tb_LostFocus"/>
-                <TextBox Name="Tb63" Style="{StaticResource TimingInactiveStyle}" Text="0.00" LostFocus="Tb_LostFocus"/>
-                <TextBox Name="Tb64" Style="{StaticResource TimingInactiveStyle}" Text="0.00" LostFocus="Tb_LostFocus"/>
-                <TextBox Name="Tb65" Style="{StaticResource TimingInactiveStyle}" Text="0.00" LostFocus="Tb_LostFocus"/>
-                <TextBox Name="Tb66" Style="{StaticResource TimingInactiveStyle}" Text="0.00" LostFocus="Tb_LostFocus"/>
-                <TextBlock Name="TaskSum6" Width="50" Margin="5,0,0,0" VerticalAlignment="Center" Text="0.00"/>
+                <TextBox Name="Tb60" Style="{StaticResource TimingInactiveStyle}" LostFocus="Tb_LostFocus"/>
+                <TextBox Name="Tb61" Style="{StaticResource TimingInactiveStyle}" LostFocus="Tb_LostFocus"/>
+                <TextBox Name="Tb62" Style="{StaticResource TimingInactiveStyle}" LostFocus="Tb_LostFocus"/>
+                <TextBox Name="Tb63" Style="{StaticResource TimingInactiveStyle}" LostFocus="Tb_LostFocus"/>
+                <TextBox Name="Tb64" Style="{StaticResource TimingInactiveStyle}" LostFocus="Tb_LostFocus"/>
+                <TextBox Name="Tb65" Style="{StaticResource TimingInactiveStyle}" LostFocus="Tb_LostFocus"/>
+                <TextBox Name="Tb66" Style="{StaticResource TimingInactiveStyle}" LostFocus="Tb_LostFocus"/>
+                <TextBlock Name="TaskSum6" Width="50" Margin="5,0,0,0" VerticalAlignment="Center"/>
                 <Button Name="TimerBtn6" Content="Start timer" Click="TimerBtn_Click"/>
             </StackPanel>
             <StackPanel Name="Task7" Orientation="Horizontal" Height="30" VerticalAlignment="Top">
                 <Label Name="TaskName7" Style="{StaticResource TaskNameStyle}"/>
-                <TextBox Name="Tb70" Style="{StaticResource TimingInactiveStyle}" Text="0.00" LostFocus="Tb_LostFocus"/>
-                <TextBox Name="Tb71" Style="{StaticResource TimingInactiveStyle}" Text="0.00" LostFocus="Tb_LostFocus"/>
-                <TextBox Name="Tb72" Style="{StaticResource TimingInactiveStyle}" Text="0.00" LostFocus="Tb_LostFocus"/>
-                <TextBox Name="Tb73" Style="{StaticResource TimingInactiveStyle}" Text="0.00" LostFocus="Tb_LostFocus"/>
-                <TextBox Name="Tb74" Style="{StaticResource TimingInactiveStyle}" Text="0.00" LostFocus="Tb_LostFocus"/>
-                <TextBox Name="Tb75" Style="{StaticResource TimingInactiveStyle}" Text="0.00" LostFocus="Tb_LostFocus"/>
-                <TextBox Name="Tb76" Style="{StaticResource TimingInactiveStyle}" Text="0.00" LostFocus="Tb_LostFocus"/>
-                <TextBlock Name="TaskSum7" Width="50" Margin="5,0,0,0" VerticalAlignment="Center" Text="0.00"/>
+                <TextBox Name="Tb70" Style="{StaticResource TimingInactiveStyle}" LostFocus="Tb_LostFocus"/>
+                <TextBox Name="Tb71" Style="{StaticResource TimingInactiveStyle}" LostFocus="Tb_LostFocus"/>
+                <TextBox Name="Tb72" Style="{StaticResource TimingInactiveStyle}" LostFocus="Tb_LostFocus"/>
+                <TextBox Name="Tb73" Style="{StaticResource TimingInactiveStyle}" LostFocus="Tb_LostFocus"/>
+                <TextBox Name="Tb74" Style="{StaticResource TimingInactiveStyle}" LostFocus="Tb_LostFocus"/>
+                <TextBox Name="Tb75" Style="{StaticResource TimingInactiveStyle}" LostFocus="Tb_LostFocus"/>
+                <TextBox Name="Tb76" Style="{StaticResource TimingInactiveStyle}" LostFocus="Tb_LostFocus"/>
+                <TextBlock Name="TaskSum7" Width="50" Margin="5,0,0,0" VerticalAlignment="Center"/>
                 <Button Name="TimerBtn7" Content="Start timer" Click="TimerBtn_Click"/>
             </StackPanel>
             <StackPanel Name="Task8" Orientation="Horizontal" Height="30" VerticalAlignment="Top">
-                <Label Name="TaskName8" Style="{StaticResource TaskNameStyle}" Content="Task 1"/>
-                <TextBox Name="Tb80" Style="{StaticResource TimingInactiveStyle}" Text="0.00" LostFocus="Tb_LostFocus"/>
-                <TextBox Name="Tb81" Style="{StaticResource TimingInactiveStyle}" Text="0.00" LostFocus="Tb_LostFocus"/>
-                <TextBox Name="Tb82" Style="{StaticResource TimingInactiveStyle}" Text="0.00" LostFocus="Tb_LostFocus"/>
-                <TextBox Name="Tb83" Style="{StaticResource TimingInactiveStyle}" Text="0.00" LostFocus="Tb_LostFocus"/>
-                <TextBox Name="Tb84" Style="{StaticResource TimingInactiveStyle}" Text="0.00" LostFocus="Tb_LostFocus"/>
-                <TextBox Name="Tb85" Style="{StaticResource TimingInactiveStyle}" Text="0.00" LostFocus="Tb_LostFocus"/>
-                <TextBox Name="Tb86" Style="{StaticResource TimingInactiveStyle}" Text="0.00" LostFocus="Tb_LostFocus"/>
-                <TextBlock Name="TaskSum8" Width="50" Margin="5,0,0,0" VerticalAlignment="Center" Text="0.00"/>
+                <Label Name="TaskName8" Style="{StaticResource TaskNameStyle}"/>
+                <TextBox Name="Tb80" Style="{StaticResource TimingInactiveStyle}" LostFocus="Tb_LostFocus"/>
+                <TextBox Name="Tb81" Style="{StaticResource TimingInactiveStyle}" LostFocus="Tb_LostFocus"/>
+                <TextBox Name="Tb82" Style="{StaticResource TimingInactiveStyle}" LostFocus="Tb_LostFocus"/>
+                <TextBox Name="Tb83" Style="{StaticResource TimingInactiveStyle}" LostFocus="Tb_LostFocus"/>
+                <TextBox Name="Tb84" Style="{StaticResource TimingInactiveStyle}" LostFocus="Tb_LostFocus"/>
+                <TextBox Name="Tb85" Style="{StaticResource TimingInactiveStyle}" LostFocus="Tb_LostFocus"/>
+                <TextBox Name="Tb86" Style="{StaticResource TimingInactiveStyle}" LostFocus="Tb_LostFocus"/>
+                <TextBlock Name="TaskSum8" Width="50" Margin="5,0,0,0" VerticalAlignment="Center"/>
                 <Button Name="TimerBtn8" Content="Start timer" Click="TimerBtn_Click"/>
             </StackPanel>
             <StackPanel Name="Task9" Orientation="Horizontal" Height="30" VerticalAlignment="Top">
-                <Label Name="TaskName9" Style="{StaticResource TaskNameStyle}" Content="Task 1"/>
-                <TextBox Name="Tb90" Style="{StaticResource TimingInactiveStyle}" Text="0.00" LostFocus="Tb_LostFocus"/>
-                <TextBox Name="Tb91" Style="{StaticResource TimingInactiveStyle}" Text="0.00" LostFocus="Tb_LostFocus"/>
-                <TextBox Name="Tb92" Style="{StaticResource TimingInactiveStyle}" Text="0.00" LostFocus="Tb_LostFocus"/>
-                <TextBox Name="Tb93" Style="{StaticResource TimingInactiveStyle}" Text="0.00" LostFocus="Tb_LostFocus"/>
-                <TextBox Name="Tb94" Style="{StaticResource TimingInactiveStyle}" Text="0.00" LostFocus="Tb_LostFocus"/>
-                <TextBox Name="Tb95" Style="{StaticResource TimingInactiveStyle}" Text="0.00" LostFocus="Tb_LostFocus"/>
-                <TextBox Name="Tb96" Style="{StaticResource TimingInactiveStyle}" Text="0.00" LostFocus="Tb_LostFocus"/>
-                <TextBlock Name="TaskSum9" Width="50" Margin="5,0,0,0" VerticalAlignment="Center" Text="0.00"/>
+                <Label Name="TaskName9" Style="{StaticResource TaskNameStyle}"/>
+                <TextBox Name="Tb90" Style="{StaticResource TimingInactiveStyle}" LostFocus="Tb_LostFocus"/>
+                <TextBox Name="Tb91" Style="{StaticResource TimingInactiveStyle}" LostFocus="Tb_LostFocus"/>
+                <TextBox Name="Tb92" Style="{StaticResource TimingInactiveStyle}" LostFocus="Tb_LostFocus"/>
+                <TextBox Name="Tb93" Style="{StaticResource TimingInactiveStyle}" LostFocus="Tb_LostFocus"/>
+                <TextBox Name="Tb94" Style="{StaticResource TimingInactiveStyle}" LostFocus="Tb_LostFocus"/>
+                <TextBox Name="Tb95" Style="{StaticResource TimingInactiveStyle}" LostFocus="Tb_LostFocus"/>
+                <TextBox Name="Tb96" Style="{StaticResource TimingInactiveStyle}" LostFocus="Tb_LostFocus"/>
+                <TextBlock Name="TaskSum9" Width="50" Margin="5,0,0,0" VerticalAlignment="Center"/>
                 <Button Name="TimerBtn9" Content="Start timer" Click="TimerBtn_Click"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal">
-                <TextBlock Name="DaySum0" Style="{StaticResource DaySumStyle}" Margin="308,0,0,0" Text="0.00"/>
-                <TextBlock Name="DaySum1" Style="{StaticResource DaySumStyle}" Text="0.00"/>
-                <TextBlock Name="DaySum2" Style="{StaticResource DaySumStyle}" Text="0.00"/>
-                <TextBlock Name="DaySum3" Style="{StaticResource DaySumStyle}" Text="0.00"/>
-                <TextBlock Name="DaySum4" Style="{StaticResource DaySumStyle}" Text="0.00"/>
-                <TextBlock Name="DaySum5" Style="{StaticResource DaySumStyle}" Text="0.00"/>
-                <TextBlock Name="DaySum6" Style="{StaticResource DaySumStyle}" Text="0.00"/>
-                <TextBlock Name="WeekTotal" Width="50" Margin="5,0,0,0" VerticalAlignment="Center" Text="0.00"/>
+                <TextBlock Name="DaySum0" Style="{StaticResource DaySumStyle}" Margin="308,0,0,0"/>
+                <TextBlock Name="DaySum1" Style="{StaticResource DaySumStyle}"/>
+                <TextBlock Name="DaySum2" Style="{StaticResource DaySumStyle}"/>
+                <TextBlock Name="DaySum3" Style="{StaticResource DaySumStyle}"/>
+                <TextBlock Name="DaySum4" Style="{StaticResource DaySumStyle}"/>
+                <TextBlock Name="DaySum5" Style="{StaticResource DaySumStyle}"/>
+                <TextBlock Name="DaySum6" Style="{StaticResource DaySumStyle}"/>
+                <TextBlock Name="WeekTotal" Width="50" Margin="5,0,0,0" VerticalAlignment="Center"/>
             </StackPanel>
         </StackPanel>
     </Grid>

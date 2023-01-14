@@ -1,9 +1,5 @@
-﻿using Microsoft.Data.Sqlite;
-using System;
-using System.Diagnostics;
-using System.IO;
+﻿using System;
 using System.Text.RegularExpressions;
-using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Threading;
@@ -16,14 +12,13 @@ public partial class MainWindow : Window
     private const string STOP_TIMER = "Stop timer";
     private const string ACTIVE_STYLE = "TimingActiveStyle";
     private const string INACTIVE_STYLE = "TimingInactiveStyle";
-    private const string ConnStr = "Data Source=C:\\Users\\bftro\\AppData\\Local\\TimeKeeper\\TimeKeeper.sqlite";
     private readonly WeekTimeWorked WeekTimeWorked;
-    private Task[] AvailableTasks;
-    private TaskTimeWorked? TimedTask;
+    private readonly Task[] AvailableTasks;
+    private Task? TimedTask;
     private Button? TimedTaskButton;
     private TextBox? TimedTaskTextBox;
     private DispatcherTimer? TaskTimer;
-    private IDataStore DataStore;
+    private readonly IDataStore DataStore;
 
     public MainWindow()
     {
@@ -95,15 +90,15 @@ public partial class MainWindow : Window
         foreach (var kvp in WeekTimeWorked.Tasks)
         {
             int taskId = kvp.Key;
-            TaskTimeWorked ttw = kvp.Value;
+            Task task = kvp.Value;
             var lbl1 = (Label)MainForm.FindName($"TaskName{i}");
             if (lbl1 != null)
             {
-                lbl1.Content = ttw.TaskName;
+                lbl1.Content = task.FullName;
             }
             for (j = 0; j < 7; j++)
             {
-                var timeWorked = ttw.GetTimeWorked((DayOfWeek)j);
+                var timeWorked = task.GetTimeWorked((DayOfWeek)j);
                 UpdateTextBox($"Tb{i}{j}", timeWorked, taskId);
             }
             var tb2 = (TextBlock)MainForm.FindName($"TaskSum{i}");
@@ -115,7 +110,7 @@ public partial class MainWindow : Window
             if (btn1 != null)
             {
                 btn1.IsEnabled = true;
-                btn1.Tag = ttw;
+                btn1.Tag = task;
             }
             i++;
         }
@@ -204,7 +199,8 @@ public partial class MainWindow : Window
 
     private static string FormatHoursAsTime(double hours)
     {
-        return hours > 0 ? TimeSpan.FromMinutes(Math.Round(60 * hours)).ToString("h\\:mm") : "";
+        var ts = TimeSpan.FromMinutes(Math.Round(60 * hours));
+        return hours > 0 ? $"{Math.Floor(ts.TotalHours):F0}:{ts.Minutes:00}" : "";
     }
 
     private void AddTaskBtn_Click(object sender, RoutedEventArgs e)
@@ -215,12 +211,7 @@ public partial class MainWindow : Window
             {
                 if (!WeekTimeWorked.Tasks.ContainsKey(task.Id))
                 {
-                    TaskTimeWorked ttw = new()
-                    {
-                        TaskId = task.Id,
-                        TaskName = task.Name,
-                    };
-                    WeekTimeWorked.Tasks.Add(task.Id, ttw);
+                    WeekTimeWorked.Tasks.Add(task.Id, task);
                     UpdateGrid();
                 }
             }
@@ -231,7 +222,7 @@ public partial class MainWindow : Window
     {
         if (sender is Button btn)
         {
-            TaskTimeWorked ttw = (TaskTimeWorked)btn.Tag;
+            Task task = (Task)btn.Tag;
             if (btn.Content.ToString() == START_TIMER)
             {
                 // If this is the first time timing is used, create the timer.
@@ -257,7 +248,7 @@ public partial class MainWindow : Window
                 }
 
                 // Start timing the selected task.
-                TimedTask = ttw;
+                TimedTask = task;
                 TimedTaskButton = btn;
                 int i = int.Parse(btn.Name[^1..]);
                 int j = (int)DateTime.Now.DayOfWeek;
@@ -317,5 +308,11 @@ public partial class MainWindow : Window
             DataStore.AddNewTask(task);
             AvailableTasksCmb.ItemsSource = DataStore.GetAllTasks();
         }
+    }
+
+    private void Summary_Click(object sender, RoutedEventArgs e)
+    {
+        Summary summary = new(WeekTimeWorked);
+        summary.ShowDialog();
     }
 }
